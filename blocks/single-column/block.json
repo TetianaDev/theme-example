@@ -1,0 +1,14 @@
+{
+    "name": "single-column",
+    "title": "Single column",
+    "description": "Block for title, small description and CTA button.",
+    "category": "theme",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "blocks/single-column/block.php"
+    },
+    "supports": {
+        "anchor": true
+    }
+}

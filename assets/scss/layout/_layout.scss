@@ -1,0 +1,47 @@
+/* ---------------------------------------
+	Sidebar
+--------------------------------------- */
+
+.sidebar {
+	@include breakpoint(small down) {
+		margin-top: 50px;
+	}
+}
+
+.widget {
+	margin-bottom: 20px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* ---------------------------------------
+	Templates
+--------------------------------------- */
+
+.entry-footer {
+	display: flex;
+	flex-direction: column;
+}
+
+.post-thumbnail {
+	margin-bottom: 15px;
+}
+
+article {
+	margin-bottom: 25px;
+}
+
+.comments {
+	.comment {
+		margin-bottom: 25px;
+		&-metadata, &-content {
+			margin-left: 37px;
+		}
+	}
+}
+
+.main-content {
+	margin-top: 25px;
+}

@@ -1,0 +1,137 @@
+@import "support";
+
+// Flexbox
+
+//----------------------------------------------------------------------
+
+// Flexbox Containers
+//
+// display: flex | inline-flex
+//
+// http://w3.org/tr/css3-flexbox/#flex-containers
+//
+// (Placeholder selectors for each type, for those who rather @extend)
+
+@mixin display-flex ($args...) {
+	display: -webkit-box $args;
+	display: -webkit-flex $args;
+	display: -moz-flex $args;
+	display: -ms-flexbox $args;
+	display: flex $args;
+}
+
+%flexbox {
+	@include display-flex;
+}
+
+/// Creates a menu icon with a set width, height, number of bars, and colors. The mixin uses the height of the icon and the weight of the bars to determine spacing. <div class="docs-example-burger"></div>
+///
+/// @param {Color} $color [$black] - Color to use for the icon.
+/// @param {Color} $color-hover [$dark-gray] - Color to use when the icon is hovered over.
+/// @param {Number} $width [20px] - Width of the icon.
+/// @param {Number} $height [16px] - Height of the icon.
+/// @param {Number} $weight [2px] - Height of individual bars in the icon.
+/// @param {Number} $bars [3] - Number of bars in the icon.
+@mixin custom-hamburger(
+	$color: $black,
+	$color-hover: $dark-gray,
+	$width: 20px,
+	$height: 16px,
+	$weight: 2px,
+	$bars: 3,
+	$radius: 0,
+) {
+	// box-shadow CSS output
+	$shadow: ();
+	$hover-shadow: ();
+
+	// Spacing between bars is calculated based on the total height of the icon and the weight of each bar
+	$spacing: divide($height - ($weight * $bars), $bars - 1);
+
+	@if unit($spacing) == 'px' {
+		$spacing: floor($spacing);
+	}
+
+	@for $i from 2 through $bars {
+		$offset: ($weight + $spacing) * ($i - 1);
+		$shadow: append($shadow, 0 $offset 0 $color, comma);
+	}
+
+	// Icon container
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: $width;
+	height: $height;
+	cursor: pointer;
+
+	span {
+		top: 0;
+		display: block;
+
+		&::before, &::after {
+			content: "";
+			display: block;
+		}
+
+		&, &::before, &::after {
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: $weight;
+			background-color: $color;
+			border-radius: $radius;
+			-webkit-transition-property: -webkit-transform, opacity;
+			transition-property: transform, opacity;
+			transition-duration: 0.15s;
+			transition-timing-function: ease;
+		}
+
+		&::before {
+			top: $spacing + $weight;
+		}
+
+		&::after {
+			top: ($spacing + $weight) * 2;
+		}
+
+		&:hover {
+			&, &::before, &::after {
+				background-color: $color-hover;
+			}
+		}
+	}
+
+	&.is-active {
+		span {
+			$y-offset: $spacing + $weight;
+
+			transform: translate3d(0, $y-offset, 0) rotate(45deg);
+
+			&::before {
+				transform: rotate(-45deg) translate3d($width / -7, $spacing * -1, 0);
+				display: none;
+				//opacity: 0;
+			}
+
+			&::after {
+				transform: translate3d(0, $y-offset * -2, 0) rotate(-90deg);
+			}
+		}
+	}
+
+	// Hover states
+	@if $color-hover {
+		// Generate CSS
+		@for $i from 2 through $bars {
+			$offset: ($weight + $spacing) * ($i - 1);
+			$hover-shadow: append($hover-shadow, 0 $offset 0 $color-hover, comma);
+		}
+
+		&:hover::after {
+			background: $color-hover;
+			box-shadow: $hover-shadow;
+		}
+	}
+
+}

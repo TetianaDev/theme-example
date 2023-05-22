@@ -1,0 +1,215 @@
+// Utils
+
+@import 'inc/mixins';
+@import 'inc/vars';
+@import "inc/fonts";
+@import 'inc/foundation-custom';
+
+// Plugins
+
+@import 'plugins/slick.scss';
+@import 'plugins/fontawesome/fontawesome.scss';
+
+/* -----------------------------------------
+   WordPress Core Classes
+----------------------------------------- */
+
+.alignnone {
+	margin: 0 1em 1em 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 1em 1em;
+}
+
+.alignleft {
+	float: left;
+	margin: 0 1em 1em 0;
+}
+
+.aligncenter {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1em;
+}
+
+@include breakpoint(small down) {
+	.alignright, .alignleft, .aligncenter, .alignnone {
+		float: none;
+		margin: 0 0 1em;
+	}
+}
+
+.wp-caption {
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	max-width: 100%;
+	padding: 5px 5px 10px;
+	text-align: center;
+
+	img {
+		width: auto;
+		margin-bottom: 10px;
+	}
+
+	p {
+		margin-bottom: 0;
+		font-size: 14px;
+	}
+}
+
+.gallery-caption {
+	font-size: 12px;
+}
+
+#wpadminbar {
+	-webkit-transform: translateZ(0);
+}
+
+
+.wp-video {
+	width: 100% !important;
+
+	.mejs-container {
+		width: 100% !important;
+	}
+}
+
+.wp-video-shortcode video, video.wp-video-shortcode {
+	width: 100% !important;
+}
+
+/* -----------------------------------------
+   Fixes
+----------------------------------------- */
+
+html {
+	height: 100%;
+}
+
+body {
+	position: static !important;
+	height: auto;
+	min-height: 100vh;
+
+	@include display-flex();
+	@include flex-direction(column);
+}
+
+.grid-container {
+	width: 100%;
+}
+
+*:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------
+	Typography
+--------------------------------------- */
+
+@import 'typography';
+
+
+/* ------------------------------------
+    Basic Styles
+------------------------------------- */
+
+/* Pagination */
+
+ul.pagination {
+	margin: 15px 0;
+	text-align: center;
+
+	li {
+		display: inline-block;
+		margin: 0 3px;
+		padding: 0;
+		line-height: 1.5;
+
+		span, a {
+			display: block;
+			padding: 0 7px;
+
+			&.current {
+				color: #fff;
+				background: $main_color;
+				display: block;
+			}
+		}
+	}
+}
+
+/* Search form */
+
+#searchform {
+	position: relative;
+}
+
+#s {
+	padding-right: 75px;
+}
+
+#searchsubmit {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	height: auto;
+	padding: 10px 15px;
+	cursor: pointer;
+
+	&::after {
+		font-size: 20px;
+		font-weight: 900;
+		font-family: $fa;
+	}
+}
+
+/* ---------------------------------------
+	Header
+--------------------------------------- */
+
+@import 'layout/header';
+
+/* ---------------------------------------
+	Footer
+--------------------------------------- */
+
+@import 'layout/footer';
+
+/* ---------------------------------------
+	Layout
+--------------------------------------- */
+
+@import 'layout/layout';
+
+/*---------------------------------------
+	TMPL: Home page
+---------------------------------------*/
+
+@import 'templates/home';
+
+
+/* ---------------------------------------
+	TMPL: Default page
+--------------------------------------- */
+
+@import 'templates/default';
+
+/* ---------------------------------------
+	TMPL: Hero
+--------------------------------------- */
+
+@import 'templates/hero';
+
+/* ---------------------------------------
+	Mac OS Retina Styles
+--------------------------------------- */
+
+@import 'retina';
+
+
+
